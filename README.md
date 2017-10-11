@@ -1,6 +1,6 @@
 #R final project
 ## Data Inspection
-*read in data
+-read in data
 snp <- read.table("snp_position.txt", header = TRUE, fill = TRUE)
 fang <- read.table("fang_et_al_genotypes.txt", header = TRUE, fill = TRUE)
 #### fang
