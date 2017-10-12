@@ -48,6 +48,9 @@
   * transzdf <-  transzdf[-(1:3),]
 - Merge snp file to maize file
   * zmerge <- merge(snp, transzdf, by.x = "SNP_ID", by.y = "Sample_ID")
+- Reorder columns into SNP ID, Chromosome, postition
+  * colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
+
 #### Teosinte file processing
 - Save transposed teosinte file 
   * transt <- t(tfang)
@@ -61,4 +64,6 @@
   * transtdf <-  transtdf[-(1:3),]
 - Merge snp file to teosinte file
   * tmerge <- merge(snp, transtdf, by.x = "SNP_ID", by.y = "Sample_ID")
+- Reorder columns into SNP ID, Chromosome, postition
+  * coltmerge <- tmerge [,c(1,3,4,2,5:990)]
 ## Data Analysis 
