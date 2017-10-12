@@ -50,7 +50,17 @@
   * zmerge <- merge(snp, transzdf, by.x = "SNP_ID", by.y = "Sample_ID")
 - Reorder columns into SNP ID, Chromosome, postition
   * colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
-
+- Seperate files by chromosome
+  * ZChr1 <- colzmerge[colzmerge$Chromosome == "1",]
+  * ZChr2 <- colzmerge[colzmerge$Chromosome == "2",]
+  * ZChr3 <- colzmerge[colzmerge$Chromosome == "3",]
+  * ZChr4 <- colzmerge[colzmerge$Chromosome == "4",]
+  * ZChr5 <- colzmerge[colzmerge$Chromosome == "5",]
+  * ZChr6 <- colzmerge[colzmerge$Chromosome == "6",]
+  * ZChr7 <- colzmerge[colzmerge$Chromosome == "7",]
+  * ZChr8 <- colzmerge[colzmerge$Chromosome == "8",]
+  * ZChr9 <- colzmerge[colzmerge$Chromosome == "9",]  
+  * ZChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
 #### Teosinte file processing
 - Save transposed teosinte file 
   * transt <- t(tfang)
@@ -66,4 +76,15 @@
   * tmerge <- merge(snp, transtdf, by.x = "SNP_ID", by.y = "Sample_ID")
 - Reorder columns into SNP ID, Chromosome, postition
   * coltmerge <- tmerge [,c(1,3,4,2,5:990)]
+- Seperate files by chromosome
+  * tChr1 <- coltmerge[coltmerge$Chromosome == "1",]
+  * tChr2 <- coltmerge[coltmerge$Chromosome == "2",]
+  * tChr3 <- coltmerge[coltmerge$Chromosome == "3",]
+  * tChr4 <- coltmerge[coltmerge$Chromosome == "4",]
+  * tChr5 <- coltmerge[coltmerge$Chromosome == "5",]
+  * tChr6 <- coltmerge[coltmerge$Chromosome == "6",]
+  * tChr7 <- coltmerge[coltmerge$Chromosome == "7",]
+  * tChr8 <- coltmerge[coltmerge$Chromosome == "8",]
+  * tChr9 <- coltmerge[coltmerge$Chromosome == "9",]  
+  * tChr10 <- coltmerge[coltmerge$Chromosome == "10",] 
 ## Data Analysis 
