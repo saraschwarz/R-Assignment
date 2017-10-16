@@ -367,13 +367,55 @@ Trying to plot!
 ggplot(mdata) + geom_bar(aes(x=Chromosome))
 ```
 
-Let's transpose mdata
-
+Melt and format data 
 ```{r}
-tmdata <- as.data.frame(t(mdata), stringsAsFactors = FALSE)
-View(tmdata)
-tfang$SampleID <- row.names(tfang)
-str(tfang$SampleID)
-str(tfang)
+fangrm <- fang[,(-2)]
+meltfang <- melt(fangrm, id.vars = c("Sample_ID", "Group"))
 ```
+
+Replace values for homozygous and heterzygous
+```{r}
+meltfang[meltfang == "A/A" | meltfang == "C/C" | meltfang == "G/G" | meltfang == "T/T"] <- 0
+
+meltfang[meltfang == "C/G" | meltfang == "C/A" | meltfang == "C/T" | meltfang == "G/T" | meltfang == "G/A" | meltfang == "A/T" | meltfang == "A/C" | meltfang == "A/G"] <- 1
+```
+
+Replace groups with species names
+```{r}
+group <- meltfang$Group
+
+meltfang$Species_ID <-group
+
+meltfang[meltfang == "ZMMIL" | meltfang == "ZMMLR" | meltfang == "ZMMMR"] <- "maize"
+
+meltfang[meltfang == "ZMPBA" | meltfang == "ZMPIL" | meltfang == "ZMPJA"] <- "teosinte"
+
+unique(meltfang$Species_ID)
+
+meltfang[meltfang == "TRIPS" | meltfang == "ZDIPL" | meltfang == "ZPERR" | meltfang == "ZLUXR" | meltfang == "ZMHUE" | meltfang == "ZMXCH" | meltfang == "ZMXCP" | meltfang == "ZMXNO" | meltfang == "ZMXNT" | meltfang == "ZMXIL"] <- "tripsacum"
+
+meltfang[meltfang == "?/?"] <- NA
+```
+
+Plot homozygous and heterzygous proportions
+```{r}
+ggplot(meltfang,aes(x = Group,fill = value)) + 
++     geom_bar(position = "fill") + scale_fill_discrete(name="Heterzygousity Proportions",
++                                                       breaks=c("0", "1", "NA"),
++                                                       labels = c("Homozygous", "Heterozygous", "NA")) + facet_grid(Species_ID ~ .)
+```
+Plot positions on each chromosome
+```{r}
+meltsnp <- melt(snp, id.vars = "Chromosome", "Position")
+meltsnp <- meltsnp[order(meltsnp$Chromosome),]
+meltsnp <- meltsnp[-c(1:2),]
+meltsnp <- meltsnp[-c(952:1015),]
+meltsnp <- meltsnp[order(meltsnp$value),]
+meltsnp <- meltsnp[-c(1),]
+meltsnp <- meltsnp[-c(940:950),]
+ggplot(meltsnp, aes(x=value, y=Chromosome)) + scale_x_discrete(breaks = seq(10000, 1000000000, by = 10000)) + geom_point() + xlab("Position") + ylab("Chromosome")
+```
+
+
+
 
