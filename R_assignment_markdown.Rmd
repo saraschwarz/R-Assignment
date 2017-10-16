@@ -57,16 +57,16 @@ colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
 
 Seperate files by chromosome
 ```{r}
-ZChr1 <- colzmerge[colzmerge$Chromosome == "1",]
-ZChr2 <- colzmerge[colzmerge$Chromosome == "2",]
-ZChr3 <- colzmerge[colzmerge$Chromosome == "3",]
-ZChr4 <- colzmerge[colzmerge$Chromosome == "4",]
-ZChr5 <- colzmerge[colzmerge$Chromosome == "5",]
-ZChr6 <- colzmerge[colzmerge$Chromosome == "6",]
-ZChr7 <- colzmerge[colzmerge$Chromosome == "7",]
-ZChr8 <- colzmerge[colzmerge$Chromosome == "8",]
-ZChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
-ZChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
+zChr1 <- colzmerge[colzmerge$Chromosome == "1",]
+zChr2 <- colzmerge[colzmerge$Chromosome == "2",]
+zChr3 <- colzmerge[colzmerge$Chromosome == "3",]
+zChr4 <- colzmerge[colzmerge$Chromosome == "4",]
+zChr5 <- colzmerge[colzmerge$Chromosome == "5",]
+zChr6 <- colzmerge[colzmerge$Chromosome == "6",]
+zChr7 <- colzmerge[colzmerge$Chromosome == "7",]
+zChr8 <- colzmerge[colzmerge$Chromosome == "8",]
+zChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
+zChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
 ```
 
 Sort position column in each chromosome file as ascending
@@ -399,7 +399,7 @@ meltfang[meltfang == "?/?"] <- NA
 
 Plot homozygous and heterzygous proportions
 ```{r}
-ggplot(meltfang,aes(x = Group,fill = value)) + 
+ggplot(meltfang, aes(x = Group, fill = value)) + 
 +     geom_bar(position = "fill") + scale_fill_discrete(name="Heterzygousity Proportions",
 +                                                       breaks=c("0", "1", "NA"),
 +                                                       labels = c("Homozygous", "Heterozygous", "NA")) + facet_grid(Species_ID ~ .)
@@ -409,7 +409,7 @@ Plot positions on each chromosome
 meltsnp <- melt(snp, id.vars = "Chromosome", "Position")
 meltsnp <- meltsnp[order(meltsnp$Chromosome),]
 meltsnp <- meltsnp[-c(1:2),]
-meltsnp <- meltsnp[-c(952:1015),]
+meltsnp <- meltsnp[-c(950:1015),]
 meltsnp <- meltsnp[order(meltsnp$value),]
 meltsnp <- meltsnp[-c(1),]
 meltsnp <- meltsnp[-c(940:950),]
