@@ -1,0 +1,10 @@
+---
+title: "Schulz_review.Rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Overall, very nicely formatted assignment. Your graphs were clear and code was correct. The only thing I would suggest is to try to condense everything into a loop so that you use less commands. A couple errors that I found were little mistakes in your script, where you used a "Z" instead of a "z", making it so that the object was not found. This was found with zChr1, where you called for ZChr1 instead for organizing into ascending order. You might also want to include the script to load the packages that you need within your Rmd file, that way it will successfully run. 
