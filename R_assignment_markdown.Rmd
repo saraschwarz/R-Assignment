@@ -6,12 +6,16 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
 ## Data Inspection
 Read in data
 ```{r}
 snp <- read.table("snp_position.txt", header = TRUE, fill = TRUE)
 fang <- read.table("fang_et_al_genotypes.txt", header = TRUE, fill = TRUE)
 ```
+
+
 ##Packages
 ```{r}
 if (!require("dplyr")) install.packages("dplyr") 
@@ -24,6 +28,7 @@ if (!require("reshape2")) install.packages("reshape2")
 library(reshape2)
 ```
 
+
 #### fang
 ```{r}
 typeof(fang)
@@ -31,6 +36,8 @@ class(fang)
 str(fang)
 dim(fang)
 ```
+
+
 #### snp_position
 ```{r}
 typeof(snp)
@@ -38,6 +45,8 @@ class(snp)
 str(snp)
 dim(snp)
 ```
+
+
 ## Data Processing
 Sorting Maize from Teosinte files
 ```{r}
@@ -61,11 +70,13 @@ names(transzdf) <- as.character(transzdf[1,])
 transzdf <-  transzdf[-(1:3),]
 ```
 
+
 Merge snp and transposed maize files and reoder columns into SNP ID, Chromosome, postition
 ```{r}
 zmerge <- merge(snp, transzdf, by.x = "SNP_ID", by.y = "Sample_ID")
 colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
 ```
+
 
 Seperate files by chromosome
 ```{r}
@@ -81,6 +92,7 @@ ZChr9 <- colzmerge[colzmerge$Chromosome == "9",]
 ZChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
 ```
 
+
 Sort position column in each chromosome file as ascending
 ```{r}
 zChr1ascend <- ZChr1[order(as.numeric(as.character(ZChr1$Position))),]
@@ -94,6 +106,7 @@ zChr8ascend <- ZChr8[order(as.numeric(as.character(ZChr8$Position))),]
 zChr9ascend <- ZChr9[order(as.numeric(as.character(ZChr9$Position))),] 
 zChr10ascend <- ZChr10[order(as.numeric(as.character(ZChr10$Position))),]
 ```
+  
   
 Sort position column in each chromosome file as descending
 ```{r}
@@ -109,6 +122,7 @@ Sort position column in each chromosome file as descending
   zChr10descend <- ZChr10[order(as.numeric(as.character(ZChr10$Position)) , decreasing = TRUE),] 
 ```
  
+ 
 Remove "?" and replace with "-" in descending files
 ```{r}
   zChr1descend[zChr1 == "?/?"] <- "-/-"
@@ -122,6 +136,7 @@ Remove "?" and replace with "-" in descending files
   zChr9descend[zChr9 == "?/?"] <- "-/-"
   zChr10descend[zChr10 == "?/?"] <- "-/-"
 ```
+
 
 Remove "mulptile" SNP position rows by changing "multiple" to NA and then removing the NAs
 ```{r}
@@ -147,6 +162,7 @@ Remove "mulptile" SNP position rows by changing "multiple" to NA and then removi
   zChr9descend <- zChr9descend[!is.na(zChr9descend$Position),]
 ```
 
+
 Remove columns that are not SNP ID, chromosome, position, and genotype columns
 ```{r}
 zChr1ascend <- zChr1ascend[, -c(4:15)]
@@ -170,6 +186,7 @@ zChr8descend <- zChr8descend[, -c(4:15)]
 zChr9descend <- zChr9descend[, -c(4:15)]
 zChr10descend <- zChr10descend[, -c(4:15)]
 ```
+
 
 Create text files for each chromosome with ascending and descending SNP positions
 ```{r}
@@ -195,6 +212,7 @@ write.table(zChr9descend, "Chromosome9_Maize_descending.txt", sep = "\t")
 write.table(zChr10descend, "Chromosome10_Maize_descending.txt", sep = "\t")
 ```
 
+
 #### Teosinte file processing
 Transpose teosinte file 
 ```{r}
@@ -205,11 +223,13 @@ Transpose teosinte file
   transtdf <-  transtdf[-(1:3),]
 ```
 
+
 Merge snp file to teosinte file
 ```{r}
   tmerge <- merge(snp, transtdf, by.x = "SNP_ID", by.y = "Sample_ID")
   coltmerge <- tmerge [,c(1,3,4,2,5:990)]
 ```
+
 
 Seperate files by chromosome
 ```{r}
@@ -225,7 +245,8 @@ Seperate files by chromosome
   tChr10 <- coltmerge[coltmerge$Chromosome == "10",]
 ```
 
- Sort position column in each chromosome file as ascending
+
+Sort position column in each chromosome file as ascending
 ```{r}
 tChr1ascend <- tChr1[order(as.numeric(as.character(tChr1$Position))),]
 tChr2ascend <- tChr2[order(as.numeric(as.character(tChr2$Position))),]
@@ -238,6 +259,7 @@ tChr8ascend <- tChr8[order(as.numeric(as.character(tChr8$Position))),]
 tChr9ascend <- tChr9[order(as.numeric(as.character(tChr9$Position))),] 
 tChr10ascend <- tChr10[order(as.numeric(as.character(tChr10$Position))),] 
 ```
+
 
 Sort position column in each chromosome file as descending
 ```{r}
@@ -253,6 +275,7 @@ tChr9descend <- tChr9[order(as.numeric(as.character(tChr9$Position)) , decreasin
 tChr10descend <- tChr10[order(as.numeric(as.character(tChr10$Position)) , decreasing = TRUE),] 
 ```
 
+
 Remove "?" and replace with "-" in descending files
 ```{r}
 tChr1descend[tChr1 == "?/?"] <- "-/-"
@@ -264,7 +287,6 @@ tChr6descend[tChr6 == "?/?"] <- "-/-"
 tChr7descend[tChr7 == "?/?"] <- "-/-"
 tChr8descend[tChr8 == "?/?"] <- "-/-"
 ```
-
 
   
 Remove "mulptile" SNP position rows by changing "multiple" to NA and then removing the NAs
@@ -314,7 +336,6 @@ tChr10descend <- tChr10descend[, -c(4:15)]
 ```
 
 
-
 Create text files for each chromosome with ascending and descending SNP positions
 ```{r}
 write.table(tChr1ascend, "Chromosome1_Teosinte_ascending.txt", sep = "\t")
@@ -341,23 +362,23 @@ write.table(tChr10descend, "Chromosome10_Teosinte_descending.txt", sep = "\t")
 
 
 ## Data Analysis
-Load files
 
+Load files
 ```{r}
 snp <- read.table("snp_position.txt", header = TRUE, stringsAsFactors = FALSE, sep = "\t")
 fang <- read.table("fang_et_al_genotypes.txt", header = TRUE, stringsAsFactors = FALSE, na.strings = "?/?")
 
 ```
 
-Check the structure 
 
+Check the structure 
 ```{r}
 str(snp)
 str(fang)
 ```
 
-Transposing the fang dataset
 
+Transposing the fang dataset
 ```{r}
 tfang <- as.data.frame(t(fang), stringsAsFactors = FALSE)
 tfang$SampleID <- row.names(tfang)
@@ -365,20 +386,21 @@ str(tfang$SampleID)
 str(tfang)
 ```
 
-Merging snp and tfang datasets
 
+Merging snp and tfang datasets
 ```{r}
 mdata <- merge(snp,tfang,by.x = "SNP_ID", by.y = "SampleID", all.y = TRUE)
 
 View(mdata)
 ```
 
-Plot by number of snps per chromosome
 
+Plot by number of snps per chromosome
 ```{r}
 
 ggplot(mdata) + geom_bar(aes(x=Chromosome))
 ```
+
 
 Number of SNPS per group
 ```{r}
@@ -392,12 +414,14 @@ fangrm <- fang[,(-2)]
 meltfang <- melt(fangrm, id.vars = c("Sample_ID", "Group"))
 ```
 
+
 Replace values for homozygous and heterzygous
 ```{r}
 meltfang[meltfang == "A/A" | meltfang == "C/C" | meltfang == "G/G" | meltfang == "T/T"] <- 0
 
 meltfang[meltfang == "C/G" | meltfang == "C/A" | meltfang == "C/T" | meltfang == "G/T" | meltfang == "G/A" | meltfang == "A/T" | meltfang == "A/C" | meltfang == "A/G"] <- 1
 ```
+
 
 Replace groups with species names
 ```{r}
@@ -418,10 +442,13 @@ meltfang$Group <- group
 meltfang[meltfang == "?/?"] <- NA
 ```
 
+
 Plot homozygous and heterzygous proportions
 ```{r}
 ggplot(meltfang, aes(x = Group, fill = value)) + geom_bar(position = "fill") + scale_fill_discrete(name="Heterzygousity Proportions", breaks=c("0", "1", "NA"), labels = c("Homozygous", "Heterozygous", "NA")) + facet_grid(Species_ID ~ .)
 ```
+
+
 Plot positions on each chromosome
 ```{r}
 meltsnp <- melt(snp, id.vars = "Chromosome", "Position")
