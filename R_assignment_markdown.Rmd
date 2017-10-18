@@ -12,6 +12,18 @@ Read in data
 snp <- read.table("snp_position.txt", header = TRUE, fill = TRUE)
 fang <- read.table("fang_et_al_genotypes.txt", header = TRUE, fill = TRUE)
 ```
+##Packages
+```{r}
+if (!require("dplyr")) install.packages("dplyr") 
+library(dplyr)
+
+if (!require("ggplot2")) install.packages("ggplot2") 
+library(ggplot2)
+
+if (!require("reshape2")) install.packages("reshape2") 
+library(reshape2)
+```
+
 #### fang
 ```{r}
 typeof(fang)
@@ -57,16 +69,16 @@ colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
 
 Seperate files by chromosome
 ```{r}
-zChr1 <- colzmerge[colzmerge$Chromosome == "1",]
-zChr2 <- colzmerge[colzmerge$Chromosome == "2",]
-zChr3 <- colzmerge[colzmerge$Chromosome == "3",]
-zChr4 <- colzmerge[colzmerge$Chromosome == "4",]
-zChr5 <- colzmerge[colzmerge$Chromosome == "5",]
-zChr6 <- colzmerge[colzmerge$Chromosome == "6",]
-zChr7 <- colzmerge[colzmerge$Chromosome == "7",]
-zChr8 <- colzmerge[colzmerge$Chromosome == "8",]
-zChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
-zChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
+ZChr1 <- colzmerge[colzmerge$Chromosome == "1",]
+ZChr2 <- colzmerge[colzmerge$Chromosome == "2",]
+ZChr3 <- colzmerge[colzmerge$Chromosome == "3",]
+ZChr4 <- colzmerge[colzmerge$Chromosome == "4",]
+ZChr5 <- colzmerge[colzmerge$Chromosome == "5",]
+ZChr6 <- colzmerge[colzmerge$Chromosome == "6",]
+ZChr7 <- colzmerge[colzmerge$Chromosome == "7",]
+ZChr8 <- colzmerge[colzmerge$Chromosome == "8",]
+ZChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
+ZChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
 ```
 
 Sort position column in each chromosome file as ascending
@@ -361,11 +373,18 @@ mdata <- merge(snp,tfang,by.x = "SNP_ID", by.y = "SampleID", all.y = TRUE)
 View(mdata)
 ```
 
-Trying to plot!
+Plot by number of snps per chromosome
 
 ```{r}
+
 ggplot(mdata) + geom_bar(aes(x=Chromosome))
 ```
+
+Number of SNPS per group
+```{r}
+ggplot(fang)+geom_bar(aes(fang$Group))+xlab("SNPS Group")+ylab("Total SNPS")
+```
+
 
 Melt and format data 
 ```{r}
@@ -394,15 +413,14 @@ unique(meltfang$Species_ID)
 
 meltfang[meltfang == "TRIPS" | meltfang == "ZDIPL" | meltfang == "ZPERR" | meltfang == "ZLUXR" | meltfang == "ZMHUE" | meltfang == "ZMXCH" | meltfang == "ZMXCP" | meltfang == "ZMXNO" | meltfang == "ZMXNT" | meltfang == "ZMXIL"] <- "tripsacum"
 
+meltfang$Group <- group
+
 meltfang[meltfang == "?/?"] <- NA
 ```
 
 Plot homozygous and heterzygous proportions
 ```{r}
-ggplot(meltfang, aes(x = Group, fill = value)) + 
-+     geom_bar(position = "fill") + scale_fill_discrete(name="Heterzygousity Proportions",
-+                                                       breaks=c("0", "1", "NA"),
-+                                                       labels = c("Homozygous", "Heterozygous", "NA")) + facet_grid(Species_ID ~ .)
+ggplot(meltfang, aes(x = Group, fill = value)) + geom_bar(position = "fill") + scale_fill_discrete(name="Heterzygousity Proportions", breaks=c("0", "1", "NA"), labels = c("Homozygous", "Heterozygous", "NA")) + facet_grid(Species_ID ~ .)
 ```
 Plot positions on each chromosome
 ```{r}
