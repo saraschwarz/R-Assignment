@@ -16,7 +16,7 @@ fang <- read.table("fang_et_al_genotypes.txt", header = TRUE, fill = TRUE)
 ```
 
 
-##Packages
+## Packages
 ```{r}
 if (!require("dplyr")) install.packages("dplyr") 
 library(dplyr)
@@ -80,16 +80,16 @@ colzmerge <- zmerge [,c(1,3,4,2,5:1588)]
 
 Seperate files by chromosome
 ```{r}
-ZChr1 <- colzmerge[colzmerge$Chromosome == "1",]
-ZChr2 <- colzmerge[colzmerge$Chromosome == "2",]
-ZChr3 <- colzmerge[colzmerge$Chromosome == "3",]
-ZChr4 <- colzmerge[colzmerge$Chromosome == "4",]
-ZChr5 <- colzmerge[colzmerge$Chromosome == "5",]
-ZChr6 <- colzmerge[colzmerge$Chromosome == "6",]
-ZChr7 <- colzmerge[colzmerge$Chromosome == "7",]
-ZChr8 <- colzmerge[colzmerge$Chromosome == "8",]
-ZChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
-ZChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
+zChr1 <- colzmerge[colzmerge$Chromosome == "1",]
+zChr2 <- colzmerge[colzmerge$Chromosome == "2",]
+zChr3 <- colzmerge[colzmerge$Chromosome == "3",]
+zChr4 <- colzmerge[colzmerge$Chromosome == "4",]
+zChr5 <- colzmerge[colzmerge$Chromosome == "5",]
+zChr6 <- colzmerge[colzmerge$Chromosome == "6",]
+zChr7 <- colzmerge[colzmerge$Chromosome == "7",]
+zChr8 <- colzmerge[colzmerge$Chromosome == "8",]
+zChr9 <- colzmerge[colzmerge$Chromosome == "9",] 
+zChr10 <- colzmerge[colzmerge$Chromosome == "10",] 
 ```
 
 
