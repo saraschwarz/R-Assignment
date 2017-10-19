@@ -95,31 +95,31 @@ zChr10 <- colzmerge[colzmerge$Chromosome == "10",]
 
 Sort position column in each chromosome file as ascending
 ```{r}
-zChr1ascend <- ZChr1[order(as.numeric(as.character(ZChr1$Position))),]
-zChr2ascend <- ZChr2[order(as.numeric(as.character(ZChr2$Position))),]
-zChr3ascend <- ZChr3[order(as.numeric(as.character(ZChr3$Position))),]
-zChr4ascend <- ZChr4[order(as.numeric(as.character(ZChr4$Position))),]
-zChr5ascend <- ZChr5[order(as.numeric(as.character(ZChr5$Position))),] 
-zChr6ascend <- ZChr6[order(as.numeric(as.character(ZChr6$Position))),] 
-zChr7ascend <- ZChr7[order(as.numeric(as.character(ZChr7$Position))),]
-zChr8ascend <- ZChr8[order(as.numeric(as.character(ZChr8$Position))),]
-zChr9ascend <- ZChr9[order(as.numeric(as.character(ZChr9$Position))),] 
-zChr10ascend <- ZChr10[order(as.numeric(as.character(ZChr10$Position))),]
+zChr1ascend <- zChr1[order(as.numeric(as.character(zChr1$Position))),]
+zChr2ascend <- zChr2[order(as.numeric(as.character(zChr2$Position))),]
+zChr3ascend <- zChr3[order(as.numeric(as.character(zChr3$Position))),]
+zChr4ascend <- zChr4[order(as.numeric(as.character(zChr4$Position))),]
+zChr5ascend <- zChr5[order(as.numeric(as.character(zChr5$Position))),] 
+zChr6ascend <- zChr6[order(as.numeric(as.character(zChr6$Position))),] 
+zChr7ascend <- zChr7[order(as.numeric(as.character(zChr7$Position))),]
+zChr8ascend <- zChr8[order(as.numeric(as.character(zChr8$Position))),]
+zChr9ascend <- zChr9[order(as.numeric(as.character(zChr9$Position))),] 
+zChr10ascend <- zChr10[order(as.numeric(as.character(zChr10$Position))),]
 ```
   
   
 Sort position column in each chromosome file as descending
 ```{r}
-  zChr1descend <- ZChr1[order(as.numeric(as.character(ZChr1$Position)) , decreasing = TRUE),]
-  zChr2descend <- ZChr2[order(as.numeric(as.character(ZChr2$Position)) , decreasing = TRUE),]
-  zChr3descend <- ZChr3[order(as.numeric(as.character(ZChr3$Position)) , decreasing = TRUE),]
-  zChr4descend <- ZChr4[order(as.numeric(as.character(ZChr4$Position)) , decreasing = TRUE),] 
-  zChr5descend <- ZChr5[order(as.numeric(as.character(ZChr5$Position)) , decreasing = TRUE),]
-  zChr6descend <- ZChr6[order(as.numeric(as.character(ZChr6$Position)) , decreasing = TRUE),]
-  zChr7descend <- ZChr7[order(as.numeric(as.character(ZChr7$Position)) , decreasing = TRUE),] 
-  zChr8descend <- ZChr8[order(as.numeric(as.character(ZChr8$Position)) , decreasing = TRUE),] 
-  zChr9descend <- ZChr9[order(as.numeric(as.character(ZChr9$Position)) , decreasing = TRUE),]
-  zChr10descend <- ZChr10[order(as.numeric(as.character(ZChr10$Position)) , decreasing = TRUE),] 
+  zChr1descend <- zChr1[order(as.numeric(as.character(zChr1$Position)) , decreasing = TRUE),]
+  zChr2descend <- zChr2[order(as.numeric(as.character(zChr2$Position)) , decreasing = TRUE),]
+  zChr3descend <- zChr3[order(as.numeric(as.character(zChr3$Position)) , decreasing = TRUE),]
+  zChr4descend <- zChr4[order(as.numeric(as.character(zChr4$Position)) , decreasing = TRUE),] 
+  zChr5descend <- zChr5[order(as.numeric(as.character(zChr5$Position)) , decreasing = TRUE),]
+  zChr6descend <- zChr6[order(as.numeric(as.character(zChr6$Position)) , decreasing = TRUE),]
+  zChr7descend <- zChr7[order(as.numeric(as.character(zChr7$Position)) , decreasing = TRUE),] 
+  zChr8descend <- zChr8[order(as.numeric(as.character(zChr8$Position)) , decreasing = TRUE),] 
+  zChr9descend <- zChr9[order(as.numeric(as.character(zChr9$Position)) , decreasing = TRUE),]
+  zChr10descend <- zChr10[order(as.numeric(as.character(zChr10$Position)) , decreasing = TRUE),] 
 ```
  
  
